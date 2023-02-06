@@ -1,0 +1,83 @@
+* Set up use-package
+#+begin_src emacs-lisp
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t)
+#+end_src
+
+* Save autosave files in a separate location
+#+begin_src emacs-lisp
+    (setq backup-directory-alist
+          `(("." . ,(concat user-emacs-directory "emacs-backup"))))
+#+end_src
+
+* Basic Configuration
+Disable the splash screen
+#+begin_src emacs-lisp
+  (setq inhibit-splash-screen t)
+#+end_src
+
+* Display preferences
+Load up a theme
+#+begin_src emacs-lisp
+  (use-package spacemacs-common
+    :ensure spacemacs-theme
+    :config (load-theme 'spacemacs-dark t))
+#+end_src
+
+Enable org-superstar package and hide leading stars
+#+begin_src emacs-lisp
+  (use-package org-superstar
+    :after org
+    :hook (org-mode . org-superstar-mode)
+    :config
+    (setq org-hide-leading-stars nil)
+    (setq org-superstar-leading-bullet ?\s)
+    (setq org-indent-mode-turns-on-hiding-stars nil))
+#+end_src
+
+Enable org-mode-indent
+#+begin_src emacs-lisp
+  (setq org-startup-indented t)
+#+end_src
+
+Put tags directly after the associated header rather than try to align them
+#+begin_src emacs-lisp
+    (setq org-auto-align-tags nil
+	  org-tags-column 0)
+#+end_src
+
+* Task Management & Agenda Views
+Keybindings
+#+begin_src emacs-lisp
+  (define-key global-map "\C-cl" 'org-store-link)
+  (define-key global-map "\C-ca" 'org-agenda)
+  (define-key global-map "\C-cc" 'org-capture)
+#+end_src
+
+Generic workflow states
+#+begin_src emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE")))
+#+end_src
+
+Log timestamp when a TODO item is marked as done
+#+begin_src emacs-lisp
+  (setq org-log-done 'time)
+#+end_src
+
+Open agenda in the current window
+#+begin_src emacs-lisp
+  (setq org-agenda-window-setup 'current-window)
+#+end_src
+
+Set org-agenda files
+#+begin_src emacs-lisp
+  (setq org-agenda-files
+    '("./org/tasks.org"))
+#+end_src
+
+Enable org-habit (without modifying the enabled defaults)
+#+begin_src emacs-lisp
+  (add-to-list 'org-modules
+        'org-habit t)
+#+end_src

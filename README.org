@@ -1,0 +1,16 @@
+* What are these?
+Configuration files used by Emacs. I copied [[https://github.com/hrs/dotfiles][Harry Schwartz]]'s file loading structure and made my own adjustments in the ~configuration.org~ file. 
+* How does it work?
+1. Emacs looks for a configuration file either called ~.emacs~, ~.emacs.el~, or ~init.el~. [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Find-Init.html][Emacs will search for the file in some set locations.]] [[https://www.gnu.org/software/emacs/manual/html_node/efaq-w32/Location-of-init-file.html][On Windows machines, they're found somewhere else.]]\\
+   I specify the exact location of the my configuration file in Windows using a shortcut with the options: ~-q -l /path/to/init.el~
+   - The ~-q~ option prevents the loading of any initialization file (in later versions of Emacs).
+   - The ~-l~ option allows you to load in your configuration file from any location.
+        
+2. At the end of the ~init.el~ file there is a function called ~org-babel-load-file~. This loads in an Org Mode file ~configuration.org~ and parses through the file for Emacs Lisp blocks. It then produces a ~configuration.el~ file that Emacs can understand and these configurations get initialized by Emacs.
+* What is the point?
+By keeping all of your customizations in a separate file that utilizes Org Mode, you can keep everything organized with detailed notes and in a list that you can collapse and expand. How great is that?
+* Alright how do I install this?
+1. Clone the project inside of your ~.emacs.d/~ folder (or wherever you keep your configuration files).\\
+   =git clone https://www.github.com/captain-chen/dotfiles.git=
+2. Get Emacs to load the ~init.el~ file. In Windows add the options  ~-q -l /path/to/init.el~ after the executable in the ~Target~ window of a shortcut.
+3. Boot up Emacs.
