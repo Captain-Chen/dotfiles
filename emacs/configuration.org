@@ -46,6 +46,14 @@ Put tags directly after the associated header rather than try to align them
 	  org-tags-column 0)
 #+end_src
 
+Enable Markdown Mode for Emacs
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t
+    :mode ("README\\.md\\'" . gfm-mode)
+    :init (setq markdown-command "multimarkdown"))
+#+end_src
+
 * Task Management & Agenda Views
 Keybindings
 #+begin_src emacs-lisp
